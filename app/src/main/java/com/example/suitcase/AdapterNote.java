@@ -32,83 +32,7 @@ public class AdapterNote extends RecyclerView.Adapter<AdapterNote.NoteViewHolder
         filterData  = new ArrayList<>(dataList);
 
     }
-//    public void setFilteredList(ArrayList<Note> filteredList){
-//        this.dataList = filteredList;
-//        notifyDataSetChanged();
-//    }
 
-//    @Override
-//    protected void onBindViewHolder(@NonNull NoteViewHolder holder, int position, @NonNull Note note) {
-//        holder.titlev.setText(note.title);
-//        holder.prv.setText("Rs."+note.price);
-//        holder.contv.setText(note.content);
-//
-//        if(note.purchased.equals("yes")){
-//            holder.cart.setVisibility(View.GONE);
-//            holder.tick.setVisibility(View.VISIBLE);
-//        }else{
-//            holder.cart.setVisibility(View.VISIBLE);
-//            holder.tick.setVisibility(View.GONE);
-//        }
-//        //add to purchased
-//        holder.cart.setOnClickListener((v)-> {
-//            note.setPurchased("yes");
-//            DocumentReference documentReference;
-//            String docid = this.getSnapshots().getSnapshot(position).getId();
-//            documentReference = Utility.getCollecRef().document(docid);
-//            documentReference.set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                @Override
-//                public void onComplete(@NonNull Task<Void> task) {
-//
-//                    if (task.isSuccessful()) {
-//                        Utility.showToast(context, "Added to purchased");
-//
-//                    } else {
-//                        Utility.showToast(context, "Failed");
-//                    }
-//                }
-//            });
-//        });
-//        //remove from purchased
-//        holder.tick.setOnClickListener((v)-> {
-//            note.setPurchased("no");
-//            DocumentReference documentReference;
-//            String docid = this.getSnapshots().getSnapshot(position).getId();
-//            documentReference = Utility.getCollecRef().document(docid);
-//            documentReference.set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                @Override
-//                public void onComplete(@NonNull Task<Void> task) {
-//
-//                    if (task.isSuccessful()) {
-//                        Utility.showToast(context, "Removed from purchased");
-//
-//                    } else {
-//                        Utility.showToast(context, "Failed");
-//                    }
-//                }
-//            });
-//        });
-//
-//        holder.send.setOnClickListener(v->{
-//            Intent intent = new Intent(context, SendMessage.class);
-//            intent.putExtra("title", note.title);
-//            intent.putExtra("price", note.price);
-//            intent.putExtra("content", note.content);
-//
-//            context.startActivity(intent);
-//        });
-//
-//        //to edit the item
-//        holder.edit.setOnClickListener((v)-> {
-//            Intent intent = new Intent(context, NewNote.class);
-//            intent.putExtra("title", note.title);
-//            intent.putExtra("price", note.price);
-//            intent.putExtra("content", note.content);
-//            String docid = this.getSnapshots().getSnapshot(position).getId();
-//            intent.putExtra("docid", docid);
-//            context.startActivity(intent);
-//        });
-//    }
 
     @NonNull
     @Override
@@ -129,10 +53,66 @@ public class AdapterNote extends RecyclerView.Adapter<AdapterNote.NoteViewHolder
             intent.putExtra("title", note.title);
             intent.putExtra("price", note.price);
             intent.putExtra("content", note.content);
+            intent.putExtra("purchased", note.purchased);
             String docid = String.valueOf(note.uid);
             intent.putExtra("docid", docid);
             context.startActivity(intent);
         });
+        holder.send.setOnClickListener(v->{
+            Intent intent = new Intent(context, SendMessage.class);
+            intent.putExtra("title", note.title);
+            intent.putExtra("price", note.price);
+            intent.putExtra("content", note.content);
+
+            context.startActivity(intent);
+        });
+
+
+
+        if(note.purchased.equals("yes")){
+            holder.cart.setVisibility(View.GONE);
+            holder.tick.setVisibility(View.VISIBLE);
+        }else{
+            holder.cart.setVisibility(View.VISIBLE);
+            holder.tick.setVisibility(View.GONE);
+        }
+        holder.tick.setOnClickListener((v)-> {
+            note.setPurchased("no");
+            DocumentReference documentReference;
+            String docid = String.valueOf(note.uid);
+            documentReference = Utility.getCollecRef().document(docid);
+            documentReference.set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                    if (task.isSuccessful()) {
+                        Utility.showToast(context, "Removed from purchased");
+                        notifyDataSetChanged();
+                    } else {
+                        Utility.showToast(context, "Failed");
+                    }
+                }
+            });
+        });
+        holder.cart.setOnClickListener((v)-> {
+            note.setPurchased("yes");
+            DocumentReference documentReference;
+            String docid = String.valueOf(note.uid);
+            documentReference = Utility.getCollecRef().document(docid);
+            documentReference.set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                    if (task.isSuccessful()) {
+                        Utility.showToast(context, "Added to purchased");
+                        notifyDataSetChanged();
+                    } else {
+                        Utility.showToast(context, "Failed");
+                    }
+                }
+            });
+        });
+
     }
 
     @Override

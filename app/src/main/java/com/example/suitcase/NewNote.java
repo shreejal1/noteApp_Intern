@@ -76,7 +76,7 @@ public class NewNote extends AppCompatActivity {
         String title = notetitle.getText().toString().trim();
         String pr = price.getText().toString().trim();
         String content = notecontent.getText().toString();
-        String purchased = "no";
+
 
         if(title==null || title.isEmpty()){
             notetitle.setError("Specify the title");
@@ -90,6 +90,7 @@ public class NewNote extends AppCompatActivity {
         }
 
         if(!isedit){
+            String purchased = "no";
             DatabaseHelper databaseHelper = DatabaseHelper.getDB(this);
             try {
                 databaseHelper.noteDao().addNote(
@@ -100,12 +101,14 @@ public class NewNote extends AppCompatActivity {
                 Toast.makeText(this, "Error occured: " + e, Toast.LENGTH_SHORT).show();
             }
         }else {
+            String purchased = getIntent().getStringExtra("purchased");
             DatabaseHelper databaseHelper = DatabaseHelper.getDB(this);
             try {
                 Note old = databaseHelper.noteDao().getNoteById(docid);
                 old.setContent(content);
                 old.setPrice(pr);
                 old.setTitle(title);
+                old.setPurchased(purchased);
                 databaseHelper.noteDao().updateNote(old);
                 startActivity(new Intent(NewNote.this, HomePage.class));
             } catch (Exception e) {
