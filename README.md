@@ -11,3 +11,7 @@ Similarly, a search feature is too implemented (for base -> title), it supports 
 **Problems**
 The problems related with this task was learning a new database framework (Room Database). It was quite easier than the traditional SQLite Database, and executes the queries fast. Similarly, several bugs were fixed during
 the assignment of this task, includes Search Operation from the Room Database, price declared at the note creation wasn't updating in the adapter, etc.
+
+**Additional**
+1. Out of the context, i have added an option to mark the notes as Phurchased or Not. Initially, the notes are set to Not Purchased and later user can edit this option with his choice.
+2. Added a sms icon which enables user to send the note via sms to any other using his number or look from the phone's contact directory.
