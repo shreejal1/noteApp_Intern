@@ -17,20 +17,26 @@ public class Note {
     public String content;
     @ColumnInfo
     public String purchased;
+    @ColumnInfo
+    public String important;
 
-    public Note(int uid, String title, String price, String content, String purchased) {
+
+
+    public Note(int uid, String title, String price, String content, String purchased, String important) {
         this.uid = uid;
         this.title = title;
         this.price = price;
         this.content = content;
         this.purchased = purchased;
+        this.important = important;
     }
     @Ignore
-    public Note(String title, String price, String content, String purchased){
+    public Note(String title, String price, String content, String purchased, String important){
         this.title = title;
         this.price = price;
         this.content = content;
         this.purchased = purchased;
+        this.important = important;
     }
 
     public Note() {
@@ -74,6 +80,14 @@ public class Note {
 
     public void setPurchased(String purchased) {
         this.purchased = purchased;
+    }
+
+    public String getImportant() {
+        return important;
+    }
+
+    public void setImportant(String important) {
+        this.important = important;
     }
 
 

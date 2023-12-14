@@ -23,6 +23,7 @@
             android:textSize="32sp"
             android:textStyle="bold"
             />
+
         <ImageButton
             android:layout_width="45dp"
             android:layout_height="45dp"
@@ -46,11 +47,49 @@
             />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imp"
+        android:layout_below="@id/titlebar"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/impmessage"
+            android:fontFamily="sans-serif"
+            android:text="Mark as important"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_star_border_24"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_gravity="end"
+            android:id="@+id/notimptBtn"
+            android:layout_toRightOf="@id/impmessage"
+            android:layout_marginLeft="20dp"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_star_24"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_gravity="end"
+            android:id="@+id/imptBtn"
+            android:visibility="gone"
+            android:layout_toRightOf="@id/impmessage"
+            android:layout_marginLeft="20dp"
+            />
+
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/titlebar"
+        android:layout_below="@+id/imp"
         android:padding="17dp"
         android:layout_marginVertical="21dp"
         android:backgroundTint="#C7F1F6"

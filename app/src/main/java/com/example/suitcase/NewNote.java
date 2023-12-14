@@ -25,11 +25,12 @@ import java.util.ArrayList;
 public class NewNote extends AppCompatActivity {
 
     EditText notetitle, price, notecontent;
-    ImageButton savenote, deletebtn;
+    ImageButton savenote, deletebtn, impBtn, notimpBtn;
     ProgressBar progress;
     TextView pagetitle;
     String title, pric, content, docid, url;
     boolean isedit = false;
+    String imp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,8 @@ public class NewNote extends AppCompatActivity {
         notecontent = findViewById(R.id.notecontent);
         savenote = findViewById(R.id.savenote);
         progress = findViewById(R.id.progress);
+        impBtn = findViewById(R.id.imptBtn);
+        notimpBtn = findViewById(R.id.notimptBtn);
         pagetitle = findViewById(R.id.pagetitle);
         deletebtn = findViewById(R.id.deletebtn);
 
@@ -48,7 +51,8 @@ public class NewNote extends AppCompatActivity {
         pric = getIntent().getStringExtra("price");
         content = getIntent().getStringExtra("content");
         docid = getIntent().getStringExtra("docid");
-
+//        imp = getIntent().getStringExtra("important");
+        String isImp = getIntent().getStringExtra("important");
 
         if(docid!=null && !docid.isEmpty()){
             isedit = true;
@@ -57,6 +61,13 @@ public class NewNote extends AppCompatActivity {
         notetitle.setText(title);
         price.setText(pric);
         notecontent.setText(content);
+        if(isImp!=null && isImp.equals("yes")){
+            impBtn.setVisibility(View.VISIBLE);
+            notimpBtn.setVisibility(View.GONE);
+        }else{
+            notimpBtn.setVisibility(View.VISIBLE);
+            impBtn.setVisibility(View.GONE);
+        }
 
         if(url != null && !url.isEmpty()) {
             notecontent.setText("Available at: " + url + "\n");
@@ -66,7 +77,19 @@ public class NewNote extends AppCompatActivity {
             pagetitle.setText("Edit your note");
             deletebtn.setVisibility(View.VISIBLE);
         }
+        notimpBtn.setOnClickListener(v->{
+            imp = "yes";
+            impBtn.setVisibility(View.VISIBLE);
+            notimpBtn.setVisibility(View.GONE);
+            Toast.makeText(this, "Marked as important", Toast.LENGTH_SHORT).show();
+        });
 
+        impBtn.setOnClickListener(v->{
+            imp = "no";
+            notimpBtn.setVisibility(View.VISIBLE);
+            impBtn.setVisibility(View.GONE);
+            Toast.makeText(this, "Marked as not important", Toast.LENGTH_SHORT).show();
+        });
         savenote.setOnClickListener(v-> saveNote());
         deletebtn.setOnClickListener(v-> deleteNote());
     }
@@ -94,7 +117,7 @@ public class NewNote extends AppCompatActivity {
             DatabaseHelper databaseHelper = DatabaseHelper.getDB(this);
             try {
                 databaseHelper.noteDao().addNote(
-                        new Note(title, pr, content, purchased)
+                        new Note(title, pr, content, purchased, imp)
                 );
                 startActivity(new Intent(NewNote.this, HomePage.class));
             } catch (Exception e) {
@@ -107,6 +130,7 @@ public class NewNote extends AppCompatActivity {
                 Note old = databaseHelper.noteDao().getNoteById(docid);
                 old.setContent(content);
                 old.setPrice(pr);
+                old.setImportant(imp);
                 old.setTitle(title);
                 old.setPurchased(purchased);
                 databaseHelper.noteDao().updateNote(old);

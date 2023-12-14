@@ -54,6 +54,7 @@ public class AdapterNote extends RecyclerView.Adapter<AdapterNote.NoteViewHolder
             intent.putExtra("price", note.price);
             intent.putExtra("content", note.content);
             intent.putExtra("purchased", note.purchased);
+            intent.putExtra("important", note.important);
             String docid = String.valueOf(note.uid);
             intent.putExtra("docid", docid);
             context.startActivity(intent);
