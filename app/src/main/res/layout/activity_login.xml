@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login"
+    android:orientation="vertical"
+    android:background="@drawable/back2"
+    android:padding="40px"
+    >
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="250px"
+            android:layout_height="250px"
+            android:layout_gravity="center"
+            android:layout_marginTop="76dp"
+            android:src="@drawable/login" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="Login"
+            android:textColor="#000000"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:id="@+id/loginlv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            >
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:layout_marginTop="50px"
+        android:hint="Email"
+        android:padding="20px"
+        android:fontFamily="sans-serif-smallcaps"
+        android:background="@drawable/rounded"
+        android:id="@+id/usernmae"
+        android:singleLine="true"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:layout_marginTop="50px"
+        android:hint="Password"
+        android:padding="20px"
+        android:id="@+id/password"
+        android:background="@drawable/rounded"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:layout_marginTop="50px"
+        android:text="Login"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textSize="20sp"
+        android:id="@+id/login"
+        android:textAllCaps="false"
+        android:background="@drawable/rounded"
+        android:textStyle="bold"
+        />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="150px"
+        android:id="@+id/progress"
+        android:layout_gravity="center"
+        android:layout_marginTop="50px"
+        android:visibility="gone"
+        />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="20px"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="New to app?"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Register"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:id="@+id/register"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
