@@ -52,7 +52,7 @@ public class HomePage extends AppCompatActivity {
                         if(arrNote.get(i).getTitle().toLowerCase().contains(query.toLowerCase())){
                             Note note = new Note();
                             note.setTitle(arrNote.get(i).title);
-                            note.setContent(arrNote.get(i).price);
+                            note.setPrice(arrNote.get(i).price);
                             note.setContent(arrNote.get(i).content);
                             note.setPurchased(arrNote.get(i).purchased);
                             note.setUid(arrNote.get(i).uid);
@@ -79,7 +79,7 @@ public class HomePage extends AppCompatActivity {
                         if(arrNote.get(i).getTitle().toLowerCase().contains(newText.toLowerCase())){
                             Note note = new Note();
                             note.setTitle(arrNote.get(i).title);
-                            note.setContent(arrNote.get(i).price);
+                            note.setPrice(arrNote.get(i).price);
                             note.setContent(arrNote.get(i).content);
                             note.setPurchased(arrNote.get(i).purchased);
                             note.setUid(arrNote.get(i).uid);
@@ -105,21 +105,21 @@ public class HomePage extends AppCompatActivity {
 
     }
 
-    private void filterList(String newText) {
-        DatabaseHelper databaseHelper = DatabaseHelper.getDB(this);
-        ArrayList<Note> arrNote = (ArrayList<Note>) databaseHelper.noteDao().getAllNotes();
-        ArrayList<Note> filteredList = new ArrayList<>();
-        for(Note note: arrNote){
-            if(note.getTitle().toLowerCase().contains(newText.toLowerCase())){
-                filteredList.add(note);
-            }
-        }
-        if(!filteredList.isEmpty()){
-//            adapterNote.(filteredList);
-        }else{
-            Toast.makeText(this, "No result found", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void filterList(String newText) {
+//        DatabaseHelper databaseHelper = DatabaseHelper.getDB(this);
+//        ArrayList<Note> arrNote = (ArrayList<Note>) databaseHelper.noteDao().getAllNotes();
+//        ArrayList<Note> filteredList = new ArrayList<>();
+//        for(Note note: arrNote){
+//            if(note.getTitle().toLowerCase().contains(newText.toLowerCase())){
+//                filteredList.add(note);
+//            }
+//        }
+//        if(!filteredList.isEmpty()){
+////            adapterNote.(filteredList);
+//        }else{
+//            Toast.makeText(this, "No result found", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     void showMenu(){
         PopupMenu popupMenu = new PopupMenu(HomePage.this, menu);
@@ -152,20 +152,5 @@ public class HomePage extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
-//    private void filterList(String newText) {
-//        DatabaseHelper databaseHelper = DatabaseHelper.getDB(this);
-//        ArrayList<Note> arrNote = (ArrayList<Note>) databaseHelper.noteDao().getAllNotes();
-//        ArrayList<Note> filteredList = new ArrayList<>();
-//        for(Note note: arrNote){
-//            if(note.getTitle().toLowerCase().contains(newText.toLowerCase())){
-//                filteredList.add(note);
-//            }
-//        }
-//        if(!filteredList.isEmpty()){
-//            adapterNote.setFilteredList(filteredList);
-//        }else{
-//            Toast.makeText(this, "No result found", Toast.LENGTH_SHORT).show();
-//        }
-//    }
 
 }

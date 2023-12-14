@@ -121,10 +121,10 @@ public class AdapterNote extends RecyclerView.Adapter<AdapterNote.NoteViewHolder
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
         Note note = dataList.get(position);
         holder.titlev.setText(note.title);
-        holder.prv.setText("Rs."+note.price);
+        holder.prv.setText("Rs. "+note.price);
         holder.contv.setText(note.content);
 
-        holder.edit.setOnClickListener((v)-> {
+        holder.itemView.setOnClickListener((v)-> {
             Intent intent = new Intent(context, NewNote.class);
             intent.putExtra("title", note.title);
             intent.putExtra("price", note.price);
@@ -133,8 +133,6 @@ public class AdapterNote extends RecyclerView.Adapter<AdapterNote.NoteViewHolder
             intent.putExtra("docid", docid);
             context.startActivity(intent);
         });
-
-
     }
 
     @Override
@@ -144,8 +142,7 @@ public class AdapterNote extends RecyclerView.Adapter<AdapterNote.NoteViewHolder
 
     class NoteViewHolder extends RecyclerView.ViewHolder {
         TextView titlev, prv, contv;
-        ImageButton cart, tick, send,edit;
-
+        ImageButton cart, tick, send;
         public NoteViewHolder(@NonNull View itemView) {
             super(itemView);
             titlev = itemView.findViewById(R.id.rectitle);
@@ -154,7 +151,6 @@ public class AdapterNote extends RecyclerView.Adapter<AdapterNote.NoteViewHolder
             cart = itemView.findViewById(R.id.cart);
             tick = itemView.findViewById(R.id.tick);
             send = itemView.findViewById(R.id.send);
-            edit = itemView.findViewById(R.id.edit);
 
         }
     }
